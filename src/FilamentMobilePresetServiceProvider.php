@@ -8,13 +8,13 @@ use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
+use Hammadzafar05\FilamentMobilePreset\Commands\FilamentMobilePresetCommand;
+use Hammadzafar05\FilamentMobilePreset\Testing\TestsFilamentMobilePreset;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Hammadzafar05\FilamentMobilePreset\Commands\FilamentMobilePresetCommand;
-use Hammadzafar05\FilamentMobilePreset\Testing\TestsFilamentMobilePreset;
 
 class FilamentMobilePresetServiceProvider extends PackageServiceProvider
 {
