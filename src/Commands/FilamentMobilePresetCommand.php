@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Hammadzafar05\FilamentMobilePreset\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class FilamentMobilePresetCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filament-mobile-preset';
 
     public $description = 'My command';
 
