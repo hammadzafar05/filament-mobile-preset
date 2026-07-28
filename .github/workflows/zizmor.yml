@@ -19,6 +19,9 @@ jobs:
     permissions:
       contents: read
       security-events: write
+      # upload-sarif reads the workflow run via the Actions API to fingerprint results.
+      # Required while the repository is private; harmless once it is public.
+      actions: read
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
