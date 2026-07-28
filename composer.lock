@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a9863ed04d7919bb818725433b7c40b",
+    "content-hash": "df6f7998a053e54e070284ed7065ef6d",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -2028,16 +2028,16 @@
         },
         {
             "name": "hammadzafar05/mobile-bottom-nav",
-            "version": "v1.3.1",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hammadzafar05/mobile-bottom-nav",
-                "reference": "598aed38850c92798ba2b38631e4d597e89d8bdc"
+                "reference": "f3844fec7305782b678b7930615a7784d20def3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hammadzafar05/mobile-bottom-nav/zipball/598aed38850c92798ba2b38631e4d597e89d8bdc",
-                "reference": "598aed38850c92798ba2b38631e4d597e89d8bdc",
+                "url": "https://api.github.com/repos/hammadzafar05/mobile-bottom-nav/zipball/f3844fec7305782b678b7930615a7784d20def3b",
+                "reference": "f3844fec7305782b678b7930615a7784d20def3b",
                 "shasum": ""
             },
             "require": {
@@ -2096,7 +2096,7 @@
                 "issues": "https://github.com/hammadzafar05/mobile-bottom-nav/issues",
                 "source": "https://github.com/hammadzafar05/mobile-bottom-nav"
             },
-            "time": "2026-07-16T08:45:37+00:00"
+            "time": "2026-07-28T07:54:27+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
