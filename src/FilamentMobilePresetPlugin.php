@@ -25,9 +25,6 @@ class FilamentMobilePresetPlugin implements Plugin
 
     protected bool $hasCreateAnother = false;
 
-    /** Null means auto: hide it whenever the bottom bar is there to replace it. */
-    protected ?bool $hidesSidebarToggle = null;
-
     public static function make(): static
     {
         return app(static::class);
@@ -93,19 +90,6 @@ class FilamentMobilePresetPlugin implements Plugin
         return $this;
     }
 
-    /**
-     * Hide the topbar hamburger on mobile, since the bottom bar's "More" button
-     * already opens the sidebar. Defaults to hiding it whenever the bottom bar is
-     * registered. Pass `false` if you also disabled that More button, or navigation
-     * beyond the bottom bar becomes unreachable.
-     */
-    public function hideSidebarToggle(bool $condition = true): static
-    {
-        $this->hidesSidebarToggle = $condition;
-
-        return $this;
-    }
-
     public function register(Panel $panel): void
     {
         if ($this->bottomNav !== false && ! $panel->hasPlugin('mobile-bottom-nav')) {
@@ -120,8 +104,6 @@ class FilamentMobilePresetPlugin implements Plugin
             PanelsRenderHook::HEAD_END,
             fn (): string => view('filament-mobile-preset::styles', [
                 'hasThumbAlignment' => $this->hasThumbAlignment,
-                // Only ever hide it when the bottom bar is there to take over.
-                'hidesSidebarToggle' => $this->hidesSidebarToggle ?? ($this->bottomNav !== false),
             ])->render(),
         );
     }

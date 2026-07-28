@@ -77,17 +77,5 @@
                 justify-content: flex-end !important;
             }
         @endif
-
-        @if ($hidesSidebarToggle)
-            /*
-                Both sidebar toggles call $store.sidebar.open(), which is exactly what the
-                bottom bar's "More" button does. `!important` because Alpine's x-show writes
-                an inline display style on these.
-            */
-            .fi-topbar-open-sidebar-btn,
-            .fi-layout-sidebar-toggle-btn-ctn {
-                display: none !important;
-            }
-        @endif
     }
 </style>

@@ -63,7 +63,9 @@ it('injects the mobile stylesheet into the head', function () {
         ->toContain('@media (pointer: coarse)');
 });
 
-it('hides the redundant hamburger while the bottom bar is registered', function () {
+it('leaves the sidebar toggle alone', function () {
+    // Owned by mobile-bottom-nav: only it knows, at render time, whether the bar
+    // actually drew and whether its More button is there to replace the hamburger.
     expect((string) FilamentView::renderHook(PanelsRenderHook::HEAD_END))
-        ->toContain('fi-topbar-open-sidebar-btn');
+        ->not->toContain('fi-topbar-open-sidebar-btn');
 });

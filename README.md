@@ -68,7 +68,6 @@ FilamentMobilePresetPlugin::make()
     ->thumbAlignment(false)
     ->slideOverModals(false)
     ->createAnother()          // restores "Create & create another"
-    ->hideSidebarToggle()      // off by default — see below
 ```
 
 | Method | Default | Effect |
@@ -78,25 +77,19 @@ FilamentMobilePresetPlugin::make()
 | `thumbAlignment(bool)` | `true` | Right-aligns page header, form and modal footer actions. |
 | `slideOverModals(bool)` | `true` | Opens action modals as slide-overs. |
 | `createAnother(bool)` | `false` | Restores the "Create & create another" action. |
-| `hideSidebarToggle(bool)` | auto | Hides the topbar hamburger on mobile whenever the bottom bar is registered. |
 
 Touch-target sizing and the safe-area fix are unconditional — an accessibility baseline and a bug
 fix, not preferences.
 
-### `hideSidebarToggle` follows the bottom bar
+### The topbar hamburger is not this plugin's business
 
 The bottom bar's "More" button and the topbar hamburger both call `$store.sidebar.open()`, so
-running both on one screen is redundant. The hamburger is therefore hidden below 1024px whenever
-the bottom bar is registered, and left alone when `bottomNav(false)` is set.
-
-One case needs an explicit opt-out — if you turn off the More button, nothing else opens the
-sidebar and every navigation item past the third becomes unreachable:
-
-```php
-FilamentMobilePresetPlugin::make()
-    ->bottomNav(MobileBottomNav::make()->moreButton(false))
-    ->hideSidebarToggle(false)
-```
+showing both is redundant. Hiding the hamburger safely means knowing whether the bottom bar
+actually rendered — it bails out for guests, for tenanted panels with no tenant resolved, and for
+panels whose navigation items have no icons — and whether the More button is enabled. Both facts
+only exist at render time inside
+[`mobile-bottom-nav`](https://github.com/hammadzafar05/mobile-bottom-nav), so that is where the
+behaviour belongs. Hiding it from here would strand users behind a bar that never drew.
 
 ### Stacked tables use Filament's 640px breakpoint
 
