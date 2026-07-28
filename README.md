@@ -56,7 +56,18 @@ would be wrong on a desktop is done in a `@media` query instead.
 
 Filament renders `<meta name="viewport" content="width=device-width, initial-scale=1">` with no
 `viewport-fit=cover`, which makes `env(safe-area-inset-*)` resolve to `0` on iOS. This preset
-patches the attribute so bottom-anchored UI clears the iPhone home indicator.
+emits a second viewport meta so bottom-anchored UI clears the iPhone home indicator.
+
+### Content Security Policy
+
+The stylesheet is injected inline, so a panel using this preset needs `style-src 'unsafe-inline'`
+— the same allowance
+[`mobile-bottom-nav`](https://github.com/hammadzafar05/mobile-bottom-nav) already requires, and
+the reason neither package needs a custom theme or a build step.
+
+It requires **no `script-src` allowance**. The safe-area fix is a meta tag rather than the
+one-line script it could have been, precisely so that installing this package does not oblige
+your app to permit inline scripts. A test asserts the injected head contains no `<script`.
 
 ## Configuration
 

@@ -14,17 +14,7 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 0
-    cooldown:
-      default-days: 7
-    labels:
-      - dependencies
-
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 5
     cooldown:
       default-days: 7
     labels:

@@ -1,10 +1,14 @@
 {{--
-    Filament emits `<meta name="viewport" content="width=device-width, initial-scale=1">`
-    with no `viewport-fit=cover`, so `env(safe-area-inset-*)` resolves to 0 on iOS and any
-    safe-area padding (including mobile-bottom-nav's) silently does nothing. Patching the
-    attribute is deterministic; a second viewport meta relies on undefined last-wins behaviour.
+    Filament renders its viewport meta with no `viewport-fit=cover`, so `env(safe-area-inset-*)`
+    resolves to 0 on iOS and every safe-area rule — including mobile-bottom-nav's — silently
+    does nothing. Browsers process viewport metas in document order and the last one wins, and
+    `viewport-fit` is a WebKit property, so iOS Safari (the only place it matters) honours this.
+
+    Deliberately a meta tag rather than a one-line script: an inline script would oblige every
+    consuming app to allow `script-src 'unsafe-inline'` just to set a single attribute. This
+    package needs no script-src allowance at all.
 --}}
-<script>document.querySelector('meta[name=viewport]')?.setAttribute('content', 'width=device-width, initial-scale=1, viewport-fit=cover')</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <style data-navigate-track>
     @media (pointer: coarse) {

@@ -63,6 +63,13 @@ it('injects the mobile stylesheet into the head', function () {
         ->toContain('@media (pointer: coarse)');
 });
 
+it('needs no script-src allowance', function () {
+    // The safe-area fix is a meta tag, not a script. Keep it that way: an inline script
+    // would force every consuming app to permit `script-src 'unsafe-inline'`.
+    expect((string) FilamentView::renderHook(PanelsRenderHook::HEAD_END))
+        ->not->toContain('<script');
+});
+
 it('leaves the sidebar toggle alone', function () {
     // Owned by mobile-bottom-nav: only it knows, at render time, whether the bar
     // actually drew and whether its More button is there to replace the hamburger.
