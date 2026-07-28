@@ -27,8 +27,13 @@ jobs:
         with:
           persist-credentials: false
 
+      # Defaults are what we want: advanced-security uploads SARIF to code scanning, giving
+      # stateful triage and letting alerts close once fixed.
+      #
+      # Do not add `annotations: true`. It is a competing report channel and the action
+      # refuses to run unless advanced-security is also set false.
+      #
+      # Be aware this mode never fails the job on findings, by design — a green run is not
+      # evidence of a clean audit, the Security tab is. To block on findings, add a ruleset
+      # requiring the code scanning check rather than relying on this job's exit code.
       - uses: zizmorcore/zizmor-action@6599ee8b7a49aef6a770f63d261d214911a7ce02 # v0.6.0
-        with:
-          # Findings also surface as workflow annotations, so a failing run is legible
-          # without opening the security tab.
-          annotations: true
