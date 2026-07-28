@@ -1,5 +1,7 @@
 # Filament Mobile Preset
 
+![Every control within reach of one thumb](art/banner.png)
+
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/hammadzafar05/filament-mobile-preset.svg?style=flat-square)](https://packagist.org/packages/hammadzafar05/filament-mobile-preset)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/hammadzafar05/filament-mobile-preset/tests.yml?branch=5.x&label=tests&style=flat-square)](https://github.com/hammadzafar05/filament-mobile-preset/actions?query=workflow%3Atests+branch%3A5.x)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/hammadzafar05/filament-mobile-preset/fix-code-style.yml?branch=5.x&label=code%20style&style=flat-square)](https://github.com/hammadzafar05/filament-mobile-preset/actions?query=workflow%3A"Fix+code+style"+branch%3A5.x)
