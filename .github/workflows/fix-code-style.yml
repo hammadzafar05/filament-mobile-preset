@@ -12,12 +12,14 @@ jobs:
   fix-code-style:
     runs-on: ubuntu-latest
     steps:
-      # persist-credentials: true is required so `git-auto-commit-action` below can push the
-      # reformatted files back to the branch. The ignore must sit inside the finding's own
-      # span (the name/uses lines) rather than above the step, or zizmor does not apply it.
-      # Kept on the name line, which dependabot never rewrites.
-      - name: Checkout code # zizmor: ignore[artipacked]
+      # No persisted credentials: this job holds contents:write and then runs
+      # `composer install`, i.e. third-party code from Packagist. A write-capable token
+      # left in .git/config would be readable by any of it. The push below authenticates
+      # explicitly instead, so the token never touches disk.
+      - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Cache Composer dependencies
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -38,7 +40,19 @@ jobs:
       - name: Run Pint
         run: ./vendor/bin/pint
 
+      # Replaces git-auto-commit-action, which needs persisted credentials to push. Keeping
+      # the token in env and only ever in the push URL means it is never written to
+      # .git/config. Pushes made with GITHUB_TOKEN do not retrigger workflows, so this
+      # cannot loop.
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
-        with:
-          commit_message: Fix styling
+        run: |
+          if git diff --quiet; then
+            echo 'Already formatted; nothing to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -am 'Fix styling'
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/${GITHUB_REF_NAME}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

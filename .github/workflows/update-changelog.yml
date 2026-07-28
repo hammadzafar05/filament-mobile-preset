@@ -12,14 +12,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # persist-credentials: true is required so `git-auto-commit-action` below can push the
-      # CHANGELOG update. The ignore must sit inside the finding's own span (the name/uses
-      # lines) rather than above the step, or zizmor does not apply it.
-      # Kept on the name line, which dependabot never rewrites.
-      - name: Checkout code # zizmor: ignore[artipacked]
+      # No persisted credentials: this job holds contents:write and runs a third-party
+      # action, so a write-capable token in .git/config would be readable by it. The push
+      # below authenticates explicitly instead.
+      # `ref` follows the repository's actual default branch — it was hardcoded to `main`,
+      # which does not exist here, so this job would have failed on the first release.
+      - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: main
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
 
       - name: Update Changelog
         uses: stefanzweifel/changelog-updater-action@a938690fad7edf25368f37e43a1ed1b34303eb36 # v1.12.0
@@ -28,8 +30,15 @@ jobs:
           release-notes: ${{ github.event.release.body }}
 
       - name: Commit updated CHANGELOG
-        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
-        with:
-          branch: main
-          commit_message: Update CHANGELOG
-          file_pattern: CHANGELOG.md
+        run: |
+          if git diff --quiet -- CHANGELOG.md; then
+            echo 'CHANGELOG unchanged; nothing to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Update CHANGELOG' -- CHANGELOG.md
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/${BRANCH}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ github.event.repository.default_branch }}
