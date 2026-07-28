@@ -20,16 +20,13 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-    <coverage>
-        <report>
-            <html outputDirectory="build/coverage"/>
-            <text outputFile="build/coverage.txt"/>
-            <clover outputFile="build/logs/clover.xml"/>
-        </report>
-    </coverage>
-    <logging>
-        <junit outputFile="build/report.junit.xml"/>
-    </logging>
+    <!--
+        No coverage report block on purpose. Requesting reports makes PHPUnit demand a
+        coverage driver, and CI runs setup-php with "coverage: none", so pest exited 1
+        before running a single test. Nothing consumed the reports either: there is no
+        codecov step and no artifact upload. Passing a coverage flag on the command line
+        still works for anyone with Xdebug or PCOV installed.
+    -->
     <source>
         <include>
             <directory suffix=".php">./src</directory>
