@@ -18,6 +18,11 @@ Initial release. Mobile-first defaults for Filament v5 panels, registered as a p
 - Fluent opt-outs for every default: `bottomNav()`, `stackedTables()`, `thumbAlignment()`, `slideOverModals()`, `createAnother()`.
 - Requires `mobile-bottom-nav` `^1.4`, which hides the now-redundant topbar hamburger itself. That decision depends on whether the bar actually rendered and whether its More button is enabled, both of which are only knowable at render time inside that package.
 
+### Compatibility
+
+- Supports Filament **4.11.5+ and 5.6.5+**, verified by running the full suite and PHPStan against both majors. Every API this plugin touches — `Table::stackedOnMobile()`, `Action::modalFooterActionsAlignment()`, `Action::slideOver()`, `CreateAction::createAnother()`, `CreateRecord::disableCreateAnother()`, `BasePage::formActionsAlignment()` — is identical across v4 and v5, as are the CSS classes the stylesheet targets.
+- The floors exclude the versions covered by four published advisories (4.0.0–4.11.4, 5.0.0–5.6.4), the most serious being an unauthenticated temporary file upload on auth pages.
+
 ### Notes
 
 - Requires no `script-src` CSP allowance. The inline stylesheet needs `style-src 'unsafe-inline'`.

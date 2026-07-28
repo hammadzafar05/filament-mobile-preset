@@ -23,6 +23,17 @@ and enlarges touch targets.
 
 Every default is a single fluent call away from being turned off.
 
+## Requirements
+
+PHP 8.2+, and Filament **4.11.5+ or 5.6.5+**.
+
+Those floors are deliberate. Filament 4.0.0–4.11.4 and 5.0.0–5.6.4 carry four published
+advisories, including an unauthenticated temporary file upload on auth pages
+([CVE-2026-48500](https://github.com/advisories)). A plain `^4.0 || ^5.0` would have advertised
+support for every one of those versions, and Composer blocks them at install time anyway. The
+plugin's own code works fine across both majors — the floors are about what it is reasonable to
+tell someone to install.
+
 ## Installation
 
 ```bash
