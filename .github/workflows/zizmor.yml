@@ -16,15 +16,22 @@ permissions:
 jobs:
   zizmor:
     runs-on: ubuntu-latest
+    # Least privilege: only contents:read is used while advanced-security is off.
+    # Uploading SARIF to the security tab would additionally need security-events:write
+    # and actions:read — add them back alongside flipping that input.
     permissions:
       contents: read
-      security-events: write
-      # upload-sarif reads the workflow run via the Actions API to fingerprint results.
-      # Required while the repository is private; harmless once it is public.
-      actions: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
       - uses: zizmorcore/zizmor-action@6599ee8b7a49aef6a770f63d261d214911a7ce02 # v0.6.0
+        with:
+          # Defaults to true, which uploads SARIF to code scanning. Code scanning is not
+          # enabled on this repository, so the upload failed the job even though the audit
+          # itself exited 0. Enable code scanning in repo settings to turn this back on.
+          advanced-security: false
+          # Without the SARIF upload, findings would only reach the raw log. Surface them
+          # as workflow annotations instead so they stay visible in the run UI.
+          annotations: true

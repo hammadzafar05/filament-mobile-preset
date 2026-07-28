@@ -12,10 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # persist-credentials: true is required so `git-auto-commit-action` below
-      # can push the CHANGELOG update.
-      # zizmor: ignore[artipacked]
-      - name: Checkout code
+      # persist-credentials: true is required so `git-auto-commit-action` below can push the
+      # CHANGELOG update. The ignore must sit inside the finding's own span (the name/uses
+      # lines) rather than above the step, or zizmor does not apply it.
+      # Kept on the name line, which dependabot never rewrites.
+      - name: Checkout code # zizmor: ignore[artipacked]
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: main
