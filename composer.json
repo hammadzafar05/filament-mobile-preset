@@ -1,13 +1,16 @@
 {
     "name": "hammadzafar05/filament-mobile-preset",
-    "description": "This is my package filament-mobile-preset",
+    "description": "Mobile-first UI/UX defaults for Filament panels: bottom navigation, thumb-reachable actions, slide-over modals and larger touch targets.",
     "keywords": [
         "hammadzafar05",
         "laravel",
         "filamentphp",
         "filament",
         "filament-plugin",
-        "filament-mobile-preset"
+        "filament-mobile-preset",
+        "mobile",
+        "responsive",
+        "ux"
     ],
     "homepage": "https://github.com/hammadzafar05/filament-mobile-preset",
     "support": {
@@ -37,12 +40,12 @@
         "pestphp/pest-plugin-arch": "^3.0|^4.0",
         "pestphp/pest-plugin-laravel": "^3.0|^4.0",
         "pestphp/pest-plugin-livewire": "^3.0|^4.0",
-        "rector/rector": "^2.0"
+        "rector/rector": "^2.0",
+        "ryangjchandler/blade-capture-directive": "^1.0"
     },
     "autoload": {
         "psr-4": {
-            "Hammadzafar05\\FilamentMobilePreset\\": "src/",
-            "Hammadzafar05\\FilamentMobilePreset\\Database\\Factories\\": "database/factories/"
+            "Hammadzafar05\\FilamentMobilePreset\\": "src/"
         }
     },
     "autoload-dev": {
@@ -63,10 +66,7 @@
         "laravel": {
             "providers": [
                 "Hammadzafar05\\FilamentMobilePreset\\FilamentMobilePresetServiceProvider"
-            ],
-            "aliases": {
-                "FilamentMobilePreset": "Hammadzafar05\\FilamentMobilePreset\\Facades\\FilamentMobilePreset"
-            }
+            ]
         }
     },
     "config": {

@@ -13,31 +13,20 @@ use Filament\Schemas\SchemasServiceProvider;
 use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Hammadzafar05\FilamentMobilePreset\FilamentMobilePresetServiceProvider;
+use Hammadzafar05\MobileBottomNav\MobileBottomNavServiceProvider;
 use Livewire\LivewireServiceProvider;
-use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
-use Hammadzafar05\FilamentMobilePreset\FilamentMobilePresetServiceProvider;
 
 class TestCase extends Orchestra
 {
-    use LazilyRefreshDatabase;
-    use WithWorkbench;
-
-    protected function setUp(): void
+    /**
+     * @return array<class-string>
+     */
+    protected function getPackageProviders($app): array
     {
-        parent::setUp();
-
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Hammadzafar05\\FilamentMobilePreset\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
-        );
-    }
-
-    protected function getPackageProviders($app)
-    {
-        $providers = [
+        return [
             ActionsServiceProvider::class,
             BladeCaptureDirectiveServiceProvider::class,
             BladeHeroiconsServiceProvider::class,
@@ -46,26 +35,19 @@ class TestCase extends Orchestra
             FormsServiceProvider::class,
             InfolistsServiceProvider::class,
             LivewireServiceProvider::class,
+            MobileBottomNavServiceProvider::class,
             NotificationsServiceProvider::class,
             SchemasServiceProvider::class,
             SupportServiceProvider::class,
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
             FilamentMobilePresetServiceProvider::class,
+            TestPanelProvider::class,
         ];
-
-        sort($providers);
-
-        return $providers;
     }
 
     public function getEnvironmentSetUp($app): void
     {
         $app['config']->set('database.default', 'testing');
-    }
-
-    protected function defineDatabaseMigrations(): void
-    {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 }
