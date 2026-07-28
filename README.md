@@ -1,6 +1,16 @@
 # Filament Mobile Preset
 
-![Every control within reach of one thumb](art/banner.png)
+<!--
+    Hidden on filamentphp.com, which renders its own hero image above the docs —
+    showing it twice would be redundant. Absolute URLs so the image resolves
+    wherever this file is rendered, not only on GitHub.
+-->
+<div class="filament-hidden">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/hammadzafar05/filament-mobile-preset/5.x/art/banner-dark.jpg">
+  <img alt="Mobile Preset — every control within reach of one thumb" src="https://raw.githubusercontent.com/hammadzafar05/filament-mobile-preset/5.x/art/banner-light.jpg">
+</picture>
+</div>
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/hammadzafar05/filament-mobile-preset.svg?style=flat-square)](https://packagist.org/packages/hammadzafar05/filament-mobile-preset)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/hammadzafar05/filament-mobile-preset/tests.yml?branch=5.x&label=tests&style=flat-square)](https://github.com/hammadzafar05/filament-mobile-preset/actions?query=workflow%3Atests+branch%3A5.x)
