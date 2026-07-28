@@ -16,6 +16,7 @@ Initial release. Mobile-first defaults for Filament v5 panels, registered as a p
 - 44px minimum touch targets on coarse pointers, covering link-style table record actions as well as icon buttons (WCAG 2.5.8).
 - `viewport-fit=cover`, so `env(safe-area-inset-*)` stops resolving to `0` on iOS and bottom-anchored UI clears the home indicator.
 - Fluent opt-outs for every default: `bottomNav()`, `stackedTables()`, `thumbAlignment()`, `slideOverModals()`, `createAnother()`.
+- Requires `mobile-bottom-nav` `^1.4`, which hides the now-redundant topbar hamburger itself. That decision depends on whether the bar actually rendered and whether its More button is enabled, both of which are only knowable at render time inside that package.
 
 ### Notes
 

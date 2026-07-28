@@ -92,15 +92,24 @@ FilamentMobilePresetPlugin::make()
 Touch-target sizing and the safe-area fix are unconditional — an accessibility baseline and a bug
 fix, not preferences.
 
-### The topbar hamburger is not this plugin's business
+### The topbar hamburger
 
 The bottom bar's "More" button and the topbar hamburger both call `$store.sidebar.open()`, so
-showing both is redundant. Hiding the hamburger safely means knowing whether the bottom bar
-actually rendered — it bails out for guests, for tenanted panels with no tenant resolved, and for
-panels whose navigation items have no icons — and whether the More button is enabled. Both facts
-only exist at render time inside
-[`mobile-bottom-nav`](https://github.com/hammadzafar05/mobile-bottom-nav), so that is where the
-behaviour belongs. Hiding it from here would strand users behind a bar that never drew.
+showing both is redundant. The hamburger is hidden for you — but by
+[`mobile-bottom-nav`](https://github.com/hammadzafar05/mobile-bottom-nav) (1.4+), not by this
+package, which is why `^1.4` is required.
+
+Hiding it safely means knowing whether the bar actually rendered — it bails out for guests, for
+tenanted panels with no resolved tenant, and for panels whose navigation items have no icons —
+and whether the More button is enabled. Both facts only exist at render time inside that package.
+Deciding it from here would strand users behind a bar that never drew.
+
+To keep the hamburger, tell the bottom bar:
+
+```php
+FilamentMobilePresetPlugin::make()
+    ->bottomNav(MobileBottomNav::make()->hideSidebarToggle(false))
+```
 
 ### Stacked tables use Filament's 640px breakpoint
 
