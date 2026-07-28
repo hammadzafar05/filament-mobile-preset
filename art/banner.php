@@ -12,14 +12,13 @@
  * drawing and measurement, and thumb reach is a measurement) with Cascadia Mono
  * for anything a developer would actually type.
  */
-
 const W = 1280;
 const H = 640;
 const S = 3;           // supersample factor
 
 const FONT_DISPLAY = 'C:/Windows/Fonts/framd.ttf';
-const FONT_MONO    = 'C:/Windows/Fonts/CascadiaMono.ttf';
-const FONT_BODY    = 'C:/Windows/Fonts/segoeuil.ttf';
+const FONT_MONO = 'C:/Windows/Fonts/CascadiaMono.ttf';
+const FONT_BODY = 'C:/Windows/Fonts/segoeuil.ttf';
 
 $im = imagecreatetruecolor(W * S, H * S);
 imagealphablending($im, true);
@@ -37,14 +36,14 @@ $col = function (string $hex, int $alpha = 0) use ($im, $rgb) {
     return imagecolorallocatealpha($im, $r, $g, $b, $alpha);
 };
 
-$INK        = '#08080C';  // near-black, faint violet cast — Filament's dark panel
-$SURFACE    = '#15151D';
-$EDGE       = '#26262F';
-$AMBER      = '#F59E0B';  // Filament Color::Amber primary
-$AMBER_LIT  = '#FCD34D';
-$TEXT       = '#FAFAFA';
-$MUTED      = '#8B8B96';
-$FAR        = '#3A3A44';  // the strain zone: what is out of reach
+$INK = '#08080C';  // near-black, faint violet cast — Filament's dark panel
+$SURFACE = '#15151D';
+$EDGE = '#26262F';
+$AMBER = '#F59E0B';  // Filament Color::Amber primary
+$AMBER_LIT = '#FCD34D';
+$TEXT = '#FAFAFA';
+$MUTED = '#8B8B96';
+$FAR = '#3A3A44';  // the strain zone: what is out of reach
 
 imagefill($im, 0, 0, $col($INK));
 
@@ -53,7 +52,11 @@ $px = fn (float $n): int => (int) round($n * S);
 
 /** Rounded rectangle, optionally outlined instead of filled. */
 $roundRect = function (float $x, float $y, float $w, float $h, float $r, $fill) use ($im, $px) {
-    $x = $px($x); $y = $px($y); $w = $px($w); $h = $px($h); $r = $px($r);
+    $x = $px($x);
+    $y = $px($y);
+    $w = $px($w);
+    $h = $px($h);
+    $r = $px($r);
     imagefilledrectangle($im, $x + $r, $y, $x + $w - $r, $y + $h, $fill);
     imagefilledrectangle($im, $x, $y + $r, $x + $w, $y + $h - $r, $fill);
     $d = $r * 2;
@@ -84,7 +87,7 @@ $tracked = function (float $size, float $x, float $y, $color, string $font, stri
     return $cx - $x;
 };
 
-$measure = function (float $size, string $font, string $str) use ($px): float {
+$measure = function (float $size, string $font, string $str): float {
     $b = imagettfbbox($size * S, 0, $font, $str);
 
     return ($b[2] - $b[0]) / S;
@@ -102,7 +105,8 @@ $mix = function (float $t) use ($col, $rgb): int {
     [$ir, $ig, $ib] = $rgb('#08080C');
     [$ar, $ag, $ab] = $rgb('#F59E0B');
 
-    return $col(sprintf('#%02X%02X%02X',
+    return $col(sprintf(
+        '#%02X%02X%02X',
         (int) round($ir + ($ar - $ir) * $t),
         (int) round($ig + ($ag - $ig) * $t),
         (int) round($ib + ($ab - $ib) * $t),
