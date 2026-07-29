@@ -4,20 +4,9 @@ All notable changes to `filament-mobile-preset` will be documented in this file.
 
 ## v1.0.0 - 2026-07-28
 
-### What's Changed
-
-* Bump actions/checkout from 7.0.0 to 7.0.1 by @dependabot[bot] in https://github.com/hammadzafar05/filament-mobile-preset/pull/2
-* Bump zizmorcore/zizmor-action from 0.5.7 to 0.6.0 by @dependabot[bot] in https://github.com/hammadzafar05/filament-mobile-preset/pull/1
-
-### New Contributors
-
-* @dependabot[bot] made their first contribution in https://github.com/hammadzafar05/filament-mobile-preset/pull/2
+Initial release. Mobile-first defaults for Filament panels, registered as a panel plugin.
 
 **Full Changelog**: https://github.com/hammadzafar05/filament-mobile-preset/commits/v1.0.0
-
-## 1.0.0 - 2026-07-28
-
-Initial release. Mobile-first defaults for Filament v5 panels, registered as a panel plugin.
 
 ### Added
 
