@@ -3,7 +3,7 @@
 
 # Check everything out with LF, on every platform. Without this, a Windows clone gets CRLF
 # working copies and Pint reports line_ending violations on files that are LF in the object
-# store and pass cleanly in CI — false failures that only the Windows maintainer sees.
+# store and pass cleanly in CI: false failures that only the Windows maintainer sees.
 * text=auto eol=lf
 
 # Keep the distributed archive to what consumers actually load: src, resources, composer.json

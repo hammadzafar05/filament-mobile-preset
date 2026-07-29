@@ -15,7 +15,7 @@ jobs:
       # No persisted credentials: this job holds contents:write and runs a third-party
       # action, so a write-capable token in .git/config would be readable by it. The push
       # below authenticates explicitly instead.
-      # `ref` follows the repository's actual default branch — it was hardcoded to `main`,
+      # `ref` follows the repository's actual default branch. It was hardcoded to `main`,
       # which does not exist here, so this job would have failed on the first release.
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

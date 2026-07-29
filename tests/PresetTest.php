@@ -49,7 +49,7 @@ it('opens action modals as slide-overs', function () {
 });
 
 it('keeps confirmation modals as centred dialogs', function () {
-    // Evaluated at render time — an eager check inside configureUsing reads false,
+    // Evaluated at render time. An eager check inside configureUsing reads false,
     // because Action-level configurations run before DeleteAction::setUp().
     expect(DeleteAction::make('delete')->isModalSlideOver())->toBeFalse();
 });

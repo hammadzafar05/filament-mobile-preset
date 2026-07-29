@@ -1,6 +1,6 @@
 {{--
     Filament renders its viewport meta with no `viewport-fit=cover`, so `env(safe-area-inset-*)`
-    resolves to 0 on iOS and every safe-area rule — including mobile-bottom-nav's — silently
+    resolves to 0 on iOS and every safe-area rule (including mobile-bottom-nav's) silently
     does nothing. Browsers process viewport metas in document order and the last one wins, and
     `viewport-fit` is a WebKit property, so iOS Safari (the only place it matters) honours this.
 
@@ -13,7 +13,7 @@
 <style data-navigate-track>
     @media (pointer: coarse) {
         /*
-            WCAG 2.5.8 — Filament does not size up actions on touch devices.
+            WCAG 2.5.8: Filament does not size up actions on touch devices.
             Table record actions default to LINK_VIEW, not icon buttons, so `.fi-link`
             has to be here too: it is the most-tapped control in a resource table.
             `.fi-link` is already inline-flex, so a min block size applies cleanly.
