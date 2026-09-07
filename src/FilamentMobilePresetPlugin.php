@@ -25,7 +25,7 @@ class FilamentMobilePresetPlugin implements Plugin
 
     protected bool $hasCreateAnother = false;
 
-    protected string | null $moreButtonLabel = null;
+    protected ?string $moreButtonLabel = null;
 
     public static function make(): static
     {
