@@ -109,7 +109,7 @@ class FilamentMobilePresetPlugin implements Plugin
                 ? $this->bottomNav
                 : MobileBottomNav::make();
 
-            if ($this->moreButtonLabel !== null && $bottomNav instanceof MobileBottomNav) {
+            if ($this->moreButtonLabel !== null) {
                 $bottomNav->moreButtonLabel($this->moreButtonLabel);
             }
 
