@@ -11,6 +11,7 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Filament\View\PanelsRenderHook;
+use Hammadzafar05\FilamentMobilePreset\FilamentMobilePresetPlugin;
 use Livewire\Component;
 
 beforeEach(function () {
@@ -75,4 +76,18 @@ it('leaves the sidebar toggle alone', function () {
     // actually drew and whether its More button is there to replace the hamburger.
     expect((string) FilamentView::renderHook(PanelsRenderHook::HEAD_END))
         ->not->toContain('fi-topbar-open-sidebar-btn');
+});
+
+it('allows customizing the more button label', function () {
+    $plugin = FilamentMobilePresetPlugin::make()
+        ->moreButtonLabel('Menu');
+
+    expect($plugin)->toBeInstanceOf(FilamentMobilePresetPlugin::class);
+});
+
+it('returns static instance for fluent chaining of more button label', function () {
+    $plugin = FilamentMobilePresetPlugin::make();
+    $result = $plugin->moreButtonLabel('Custom Label');
+
+    expect($result)->toBe($plugin);
 });

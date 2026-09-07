@@ -13,7 +13,7 @@
 </div>
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/hammadzafar05/filament-mobile-preset.svg?style=flat-square)](https://packagist.org/packages/hammadzafar05/filament-mobile-preset)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/hammadzafar05/filament-mobile-preset/tests.yml?branch=5.x&label=tests&style=flat-square)](https://github.com/hammadzafar05/filament-mobile-preset/actions?query=workflow%3Atests+branch%3A5.x)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/hammadzafar05/filament-mobile-preset/tests.yml?branch=5.x&label=tests&style=flat-square)](https://github.com/hammadzafar05/filament-mobile-preset/actions?query=workflow%3Arun-tests+branch%3A5.x)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/hammadzafar05/filament-mobile-preset/fix-code-style.yml?branch=5.x&label=code%20style&style=flat-square)](https://github.com/hammadzafar05/filament-mobile-preset/actions?query=workflow%3A"Fix+code+style"+branch%3A5.x)
 [![Total Downloads](https://img.shields.io/packagist/dt/hammadzafar05/filament-mobile-preset.svg?style=flat-square)](https://packagist.org/packages/hammadzafar05/filament-mobile-preset)
 
@@ -25,7 +25,7 @@ Every default is a single fluent call away from being turned off.
 
 | Without the preset | With the preset |
 |---|---|
-| <img alt="A resource table on a phone without the preset: the table scrolls sideways, the email column is clipped mid-word, and the row actions sit off-screen" src="https://raw.githubusercontent.com/hammadzafar05/filament-mobile-preset/5.x/art/before.png" width="320"> | <img alt="The same table with the preset: each row is a labelled card, Edit and Delete sit bottom-right within thumb reach, and a bottom navigation bar is fixed to the foot of the screen" src="https://raw.githubusercontent.com/hammadzafar05/filament-mobile-preset/5.x/art/after.png" width="320"> |
+| <img alt="A resource table on a phone without the preset: the table scrolls sideways, the email column is clipped mid-word, and the row actions sit off-screen" src="https://raw.githubusercontent.com/hammadzafar05/filament-mobile-preset/5.x/art/without-preset.png" width="200"> | <img alt="A resource table on a phone with the preset: the rows are stacked as cards, each value is labelled, and the row actions are at the bottom" src="https://raw.githubusercontent.com/hammadzafar05/filament-mobile-preset/5.x/art/with-preset.png" width="200"> |
 | Sideways scroll, clipped values, row actions out of reach | Stacked cards, actions in reach, bottom navigation |
 
 ## Requirements
@@ -81,15 +81,17 @@ FilamentMobilePresetPlugin::make()
     ->thumbAlignment(false)
     ->slideOverModals(false)
     ->createAnother()          // restores "Create & create another"
+    ->moreButtonLabel('Menu')  // customize the "More" button label
 ```
 
 | Method | Default | Effect |
 |---|---|---|
-| `bottomNav(bool\|MobileBottomNav)` | `true` | Registers the bottom bar. Pass a configured instance to customise it, or `false` to skip. Skipped automatically if you already registered `MobileBottomNav` yourself. |
+| `bottomNav(bool\|MobileBottomNav)` | `true` | Registers the bottom bar. Pass a configured instance to customise it, or `false` to skip. Skipped automatically if you already registered `mobile-bottom-nav`. |
 | `stackedTables(bool)` | `true` | Renders table rows as stacked, labelled cards below 640px instead of scrolling sideways. |
 | `thumbAlignment(bool)` | `true` | Right-aligns page header, form and modal footer actions. |
 | `slideOverModals(bool)` | `true` | Opens action modals as slide-overs. |
 | `createAnother(bool)` | `false` | Restores the "Create & create another" action. |
+| `moreButtonLabel(string)` | `"More"` | Customizes the text displayed on the "More" button in the mobile bottom navigation bar. |
 
 Touch-target sizing and the safe-area fix are unconditional: an accessibility baseline and a bug
 fix, not preferences.
@@ -124,6 +126,15 @@ class CreatePost extends CreateRecord
 {
     protected static bool $canCreateAnother = true;
 }
+```
+
+### Customizing the more button label
+
+Pass a custom label to the `moreButtonLabel()` method:
+
+```php
+FilamentMobilePresetPlugin::make()
+    ->moreButtonLabel('Navigation')  // or any other label
 ```
 
 ## Deployment notes
