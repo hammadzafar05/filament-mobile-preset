@@ -12,7 +12,6 @@ use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Filament\View\PanelsRenderHook;
 use Hammadzafar05\FilamentMobilePreset\FilamentMobilePresetPlugin;
-use Hammadzafar05\MobileBottomNav\MobileBottomNav;
 use Livewire\Component;
 
 beforeEach(function () {
