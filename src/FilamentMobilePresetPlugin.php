@@ -25,6 +25,8 @@ class FilamentMobilePresetPlugin implements Plugin
 
     protected bool $hasCreateAnother = false;
 
+    protected string | null $moreButtonLabel = null;
+
     public static function make(): static
     {
         return app(static::class);
@@ -90,14 +92,28 @@ class FilamentMobilePresetPlugin implements Plugin
         return $this;
     }
 
+    /**
+     * Customize the "More" button label in the mobile bottom navigation bar.
+     */
+    public function moreButtonLabel(string $label): static
+    {
+        $this->moreButtonLabel = $label;
+
+        return $this;
+    }
+
     public function register(Panel $panel): void
     {
         if ($this->bottomNav !== false && ! $panel->hasPlugin('mobile-bottom-nav')) {
-            $panel->plugin(
-                $this->bottomNav instanceof MobileBottomNav
-                    ? $this->bottomNav
-                    : MobileBottomNav::make(),
-            );
+            $bottomNav = $this->bottomNav instanceof MobileBottomNav
+                ? $this->bottomNav
+                : MobileBottomNav::make();
+
+            if ($this->moreButtonLabel !== null && $bottomNav instanceof MobileBottomNav) {
+                $bottomNav->moreButtonLabel($this->moreButtonLabel);
+            }
+
+            $panel->plugin($bottomNav);
         }
 
         $panel->renderHook(
