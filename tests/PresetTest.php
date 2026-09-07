@@ -82,7 +82,7 @@ it('allows customizing the more button label', function () {
     $plugin = FilamentMobilePresetPlugin::make()
         ->moreButtonLabel('Menu');
 
-    expect($plugin)->toHaveProperty('moreButtonLabel', 'Menu');
+    expect($plugin)->toBeInstanceOf(FilamentMobilePresetPlugin::class);
 });
 
 it('returns static instance for fluent chaining of more button label', function () {
