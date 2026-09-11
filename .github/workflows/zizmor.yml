@@ -36,4 +36,4 @@ jobs:
       # Be aware this mode never fails the job on findings, by design. A green run is not
       # evidence of a clean audit; the Security tab is. To block on findings, add a ruleset
       # requiring the code scanning check rather than relying on this job's exit code.
-      - uses: zizmorcore/zizmor-action@3dc1ecc9bcb9e94e9b2c709687979e1298497054 # v0.6.2
+      - uses: zizmorcore/zizmor-action@70fb788f84895a7701f5643d103d587e460b5c99 # v0.6.3
